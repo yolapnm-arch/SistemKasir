@@ -17,85 +17,120 @@ body{
     background:#f4f4f4;
 }
 
-header{
+.header{
     background:#007bff;
     color:white;
-    padding:15px;
+    padding:20px;
     text-align:center;
 }
 
 .container{
-    width:90%;
-    margin:20px auto;
+    display:flex;
 }
 
-.menu{
+.sidebar{
+    width:220px;
+    background:#343a40;
+    min-height:100vh;
+    padding-top:20px;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:15px;
+}
+
+.sidebar a:hover{
+    background:#007bff;
+}
+
+.content{
+    flex:1;
+    padding:20px;
+}
+
+.card-container{
     display:flex;
     gap:20px;
     flex-wrap:wrap;
 }
 
 .card{
-    background:white;
     width:220px;
+    background:white;
     padding:20px;
     border-radius:10px;
-    text-align:center;
     box-shadow:0 2px 8px rgba(0,0,0,0.2);
+    text-align:center;
 }
 
 .card h3{
     margin-bottom:10px;
 }
 
-.card button{
-    padding:10px 20px;
-    border:none;
+.card p{
+    margin-bottom:15px;
+}
+
+button{
     background:#007bff;
     color:white;
+    border:none;
+    padding:10px 20px;
     border-radius:5px;
     cursor:pointer;
 }
 
-.card button:hover{
+button:hover{
     background:#0056b3;
 }
 </style>
-</head>
 
+</head>
 <body>
 
-<header>
+<div class="header">
     <h1>Dashboard Kasir</h1>
     <p>Selamat Datang, Admin</p>
-</header>
+</div>
 
 <div class="container">
 
-<div class="menu">
+<div class="sidebar">
+    <a href="#">🏠 Dashboard</a>
+    <a href="barang.html">📦 Data Barang</a>
+    <a href="transaksi.html">🛒 Transaksi</a>
+    <a href="laporan.html">📊 Laporan</a>
+    <a href="#" onclick="logout()">🚪 Logout</a>
+</div>
+
+<div class="content">
+
+<h2>Menu Utama</h2>
+<br>
+
+<div class="card-container">
 
 <div class="card">
-    <h3>Transaksi</h3>
-    <p>Melayani penjualan.</p>
-    <button onclick="alert('Menu Transaksi')">Buka</button>
+<h3>📦 Data Barang</h3>
+<p>Kelola data barang.</p>
+<button onclick="window.location.href='kasir.html'">Buka</button>
 </div>
 
 <div class="card">
-    <h3>Data Barang</h3>
-    <p>Kelola data barang.</p>
-    <button onclick="alert('Menu Data Barang')">Buka</button>
+<h3>🛒 Transaksi</h3>
+<p>Melayani transaksi penjualan.</p>
+<button onclick="window.location.href='transaksi.html'">Buka</button>
 </div>
 
 <div class="card">
-    <h3>Laporan</h3>
-    <p>Lihat laporan penjualan.</p>
-    <button onclick="alert('Menu Laporan')">Buka</button>
+<h3>📊 Laporan</h3>
+<p>Lihat laporan penjualan.</p>
+<button onclick="window.location.href='laporan.html'">Buka</button>
 </div>
 
-<div class="card">
-    <h3>Logout</h3>
-    <p>Keluar dari aplikasi.</p>
-    <button onclick="logout()">Logout</button>
 </div>
 
 </div>
@@ -105,7 +140,7 @@ header{
 <script>
 function logout(){
     if(confirm("Yakin ingin logout?")){
-        window.location.href="index.html";
+        window.location.href="login.html";
     }
 }
 </script>
