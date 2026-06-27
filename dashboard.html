@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Kasir</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+}
+
+header{
+    background:#007bff;
+    color:white;
+    padding:15px;
+    text-align:center;
+}
+
+.container{
+    width:90%;
+    margin:20px auto;
+}
+
+.menu{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.card{
+    background:white;
+    width:220px;
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
+    box-shadow:0 2px 8px rgba(0,0,0,0.2);
+}
+
+.card h3{
+    margin-bottom:10px;
+}
+
+.card button{
+    padding:10px 20px;
+    border:none;
+    background:#007bff;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.card button:hover{
+    background:#0056b3;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Dashboard Kasir</h1>
+    <p>Selamat Datang, Admin</p>
+</header>
+
+<div class="container">
+
+<div class="menu">
+
+<div class="card">
+    <h3>Transaksi</h3>
+    <p>Melayani penjualan.</p>
+    <button onclick="alert('Menu Transaksi')">Buka</button>
+</div>
+
+<div class="card">
+    <h3>Data Barang</h3>
+    <p>Kelola data barang.</p>
+    <button onclick="alert('Menu Data Barang')">Buka</button>
+</div>
+
+<div class="card">
+    <h3>Laporan</h3>
+    <p>Lihat laporan penjualan.</p>
+    <button onclick="alert('Menu Laporan')">Buka</button>
+</div>
+
+<div class="card">
+    <h3>Logout</h3>
+    <p>Keluar dari aplikasi.</p>
+    <button onclick="logout()">Logout</button>
+</div>
+
+</div>
+
+</div>
+
+<script>
+function logout(){
+    if(confirm("Yakin ingin logout?")){
+        window.location.href="index.html";
+    }
+}
+</script>
+
+</body>
+</html>
