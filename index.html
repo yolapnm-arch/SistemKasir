@@ -1,211 +1,78 @@
-"<!DOCTYPE html>
-<html lang=\"id\">
+<!DOCTYPE html>
+<html lang="id">
 <head>
-  <meta charset=\"UTF-8\" />
-  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />
-  <title>Form Login</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
 
-    body {
-      min-height: 100vh;
-      background-color: #f0f2f5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f2f2f2;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
 
-    .form-container {
-      background-color: #ffffff;
-      width: 100%;
-      max-width: 400px;
-      padding: 35px 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
+.login{
+    background:white;
+    padding:20px;
+    width:300px;
+    border-radius:8px;
+    box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
 
-    .form-container h2 {
-      text-align: center;
-      color: #333;
-      margin-bottom: 25px;
-      font-size: 26px;
-    }
+h2{
+    text-align:center;
+}
 
-    .form-group {
-      margin-bottom: 18px;
-    }
+input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    box-sizing:border-box;
+}
 
-    .form-group label {
-      display: block;
-      margin-bottom: 6px;
-      color: #555;
-      font-size: 14px;
-      font-weight: bold;
-    }
+button{
+    width:100%;
+    padding:10px;
+    background:#007bff;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
 
-    .form-group input {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 14px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .form-group input:focus {
-      border-color: #1e90ff;
-    }
-
-    .form-options {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      font-size: 13px;
-    }
-
-    .form-options label {
-      color: #555;
-      cursor: pointer;
-    }
-
-    .form-options a {
-      color: #1e90ff;
-      text-decoration: none;
-    }
-
-    .form-options a:hover {
-      text-decoration: underline;
-    }
-
-    .btn-login {
-      width: 100%;
-      background-color: #1e90ff;
-      color: white;
-      border: none;
-      padding: 11px;
-      border-radius: 6px;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.2s;
-    }
-
-    .btn-login:hover {
-      background-color: #1873cc;
-    }
-
-    .register-link {
-      text-align: center;
-      margin-top: 18px;
-      font-size: 13px;
-      color: #555;
-    }
-
-    .register-link a {
-      color: #1e90ff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .register-link a:hover {
-      text-decoration: underline;
-    }
-
-    .error-msg {
-      background-color: #ffe6e6;
-      color: #c0392b;
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-size: 13px;
-      margin-bottom: 15px;
-      display: none;
-    }
-  </style>
+button:hover{
+    background:#0056b3;
+}
+</style>
 </head>
+
 <body>
 
-  <div class=\"form-container\">
-    <h2>Form Login</h2>
+<div class="login">
+    <h2>Login</h2>
 
-    <div class=\"error-msg\" id=\"errorMsg\"></div>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
 
-    <form id=\"loginForm\" onsubmit=\"return prosesLogin(event)\">
-      <div class=\"form-group\">
-        <label for=\"username\">Username</label>
-        <input
-          type=\"text\"
-          id=\"username\"
-          name=\"username\"
-          placeholder=\"Masukkan username\"
-          required
-        />
-      </div>
+    <button onclick="login()">Login</button>
+</div>
 
-      <div class=\"form-group\">
-        <label for=\"password\">Password</label>
-        <input
-          type=\"password\"
-          id=\"password\"
-          name=\"password\"
-          placeholder=\"Masukkan password\"
-          required
-        />
-      </div>
+<script>
+function login(){
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
 
-     
-      <button type=\"submit\" class=\"btn-login\">Login</button>
-
-      
-    </form>
-  </div>
-
-  <script>
-    function prosesLogin(event) {
-      event.preventDefault();
-
-      const username = document.getElementById('username').value.trim();
-      const password = document.getElementById('password').value;
-      const errorMsg = document.getElementById('errorMsg');
-
-      // Validasi input kosong
-      if (username === '' || password === '') {
-        tampilkanError('Username dan password tidak boleh kosong!');
-        return false;
-      }
-
-      // Validasi panjang password
-      if (password.length < 6) {
-        tampilkanError('Password minimal 6 karakter!');
-        return false;
-      }
-
-      // Cek username & password (contoh hardcode)
-      if (username === 'admin' && password === 'admin123') {
-        errorMsg.style.display = 'none';
-        alert('Login berhasil! Selamat datang, ' + username);
-         window.location.href = "kasir.html"; pindah ke halaman lain
-      } else {
-        tampilkanError('Username atau password salah!');
-      }
-
-      return false;
+    if(username === "admin" && password === "admin123"){
+        alert("Login berhasil");
+        window.location.href = "kasir.html";
+    }else{
+        alert("Username atau Password salah!");
     }
-
-    function tampilkanError(pesan) {
-      const errorMsg = document.getElementById('errorMsg');
-      errorMsg.textContent = pesan;
-      errorMsg.style.display = 'block';
-    }
-  </script>
+}
+</script>
 
 </body>
 </html>
-"
