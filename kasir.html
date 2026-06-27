@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sistem Kasir</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Sistem Kasir</h2>
+
+<input type="text" id="nama" placeholder="Nama Barang">
+<input type="number" id="harga" placeholder="Harga">
+<button onclick="tambah()">Tambah</button>
+
+<br><br>
+
+<input type="text" id="cari" placeholder="Cari Barang" onkeyup="tampil()">
+
+<table border="1">
+<thead>
+<tr>
+<th>Nama</th>
+<th>Harga</th>
+<th>Aksi</th>
+</tr>
+</thead>
+
+<tbody id="data"></tbody>
+
+</table>
+
+<script src="script.js"></script>
+
+</body>
+</html>
