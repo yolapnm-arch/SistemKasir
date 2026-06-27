@@ -1,56 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>LOGIN KASIR</title>
-<link rel="stylesheet"href="style.css">
-</head>
 <body>
-<div class="login">
->h2[D[D[D[<[C[C>Login Kasir</h2>
-<input type="text" id="username"
-placeholder="Username"><br><br>
-<input type="password" id="password"
-placeholder="Password"><br><br>
 
-<button onclick="login()">Login<?button>
+<div class="container">
+
+<h2>Sistem Kasir Penjualan</h2>
+
+<input type="text" id="nama" placeholder="Nama Barang">
+<input type="number" id="harga" placeholder="Harga">
+<button onclick="tambah()">Tambah</button>
+
+<br><br>
+
+<input type="text" id="cari" placeholder="Cari Barang" onkeyup="tampil()">
+
+<table>
+    ...
+</table>
+
 </div>
 
-<script>
-function login(){
-let
-user=document.getElementBy[Cyld("username").value;
-let
-pass=document.getElementByld("password").value;
-
-[A[A[A[B[[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[[A[A[C[C[C[C[C[C[C[C[C[C[A[C[C[C[[A[A[B[B[A[A[C[C[C[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[A[C[C[C[C[C[C[C[C[C[C[C[C[A[C[C[C[C[C[C[C[C[C[C[C[C[C[[A[C[C[C[C[[A[C[C[C[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[A[C[C[[A[C[C[C[A[C[C[C[C[C[C[C[C[C[C[C[C
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login Kasir</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="login">
-        <h2>Login Kasir</h2>
-
-        <input type="text" id="username" placeholder="Username"><br><br>
-        <input type="password" id="password" placeholder="Password"><br><br>
-
-        <button onclick="login()">Login</button>
-    </div>
-
-<script>
-function login(){
-    let user=document.getElementById("username").value;
-    let pass=document.getElementById("password").value;
-
-    if(user=="admin" && pass=="12345"){
-        window.location="kasir.html";
-    }else{
-        alert("Username atau Password salah");
-    }
-}
-</script>
-
 </body>
-</html>

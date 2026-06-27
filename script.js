@@ -29,6 +29,7 @@ if(b.nama.toLowerCase().includes(cari)){
 
 hasil+=`
 <tr>
+<td>${index + 1}</td>
 
 <td>${b.nama}</td>
 
