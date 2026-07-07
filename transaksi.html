@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Transaksi</title>
+
+<style>
+body{
+    font-family:Arial;
+    padding:20px;
+}
+
+input,select,button{
+    padding:8px;
+    margin:5px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+table,th,td{
+    border:1px solid #ddd;
+}
+
+th,td{
+    padding:10px;
+    text-align:center;
+}
+
+button{
+    cursor:pointer;
+}
+</style>
+
+</head>
+<body>
+
+<h2>Data Transaksi</h2>
+
+<select id="barang" onchange="ambilHarga()">
+<option value="">Pilih Barang</option>
+</select>
+
+<input type="number" id="harga" readonly placeholder="Harga">
+
+<input type="number" id="jumlah" placeholder="Jumlah">
+
+<button onclick="tambahTransaksi()">Tambah</button>
+
+<table>
+<thead>
+<tr>
+<th>Nama Barang</th>
+<th>Harga</th>
+<th>Jumlah</th>
+<th>Total</th>
+</tr>
+</thead>
+
+<tbody id="tbody"></tbody>
+</table>
+
+<h3>Total Barang : <span id="totalBarang">0</span></h3>
+
+<h3>Total Bayar : Rp <span id="totalBayar">0</span></h3>
+
+<button onclick="simpanTransaksi()">
+Simpan Transaksi
+</button>
+
+<button onclick="window.location.href='dashboard.html'">
+Kembali Dashboard
+</button>
+
+<script src="transaksi.js"></script>
+
+</body>
+</html>
