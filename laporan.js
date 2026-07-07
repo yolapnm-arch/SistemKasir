@@ -1,44 +1,61 @@
-// Ambil data laporan
+// ===============================
+// AMBIL DATA LAPORAN
+// ===============================
+
 let laporan = JSON.parse(localStorage.getItem("laporan")) || [];
 
-// Tampilkan laporan
+// ===============================
+// TAMPILKAN LAPORAN
+// ===============================
+
 function tampilLaporan() {
 
     let isi = "";
 
-    laporan.forEach((data, i) => {
+    if (laporan.length == 0) {
 
-        let detailBarang = "";
-
-        data.detail.forEach(item => {
-            detailBarang += `
-                ${item.nama} (${item.jumlah}) - Rp ${item.subtotal.toLocaleString("id-ID")}<br>
-            `;
-        });
-
-        isi += `
-        <tr>
-            <td>${i + 1}</td>
-            <td>${data.tanggal}</td>
-            <td class="detail">${detailBarang}</td>
-            <td>${data.totalBarang}</td>
-            <td>Rp ${data.totalBayar.toLocaleString("id-ID")}</td>
-        </tr>
-        `;
-    });
-
-    if (laporan.length === 0) {
         isi = `
         <tr>
             <td colspan="5">Belum ada data laporan.</td>
         </tr>
         `;
+
+    } else {
+
+        laporan.forEach((data, i) => {
+
+            let detail = "";
+
+            data.detail.forEach(item => {
+
+                detail += `
+                    ${item.nama} (${item.jumlah})<br>
+                `;
+
+            });
+
+            isi += `
+            <tr>
+                <td>${i + 1}</td>
+                <td>${data.tanggal}</td>
+                <td>${detail}</td>
+                <td>${data.totalBarang}</td>
+                <td>Rp ${Number(data.totalBayar).toLocaleString("id-ID")}</td>
+            </tr>
+            `;
+
+        });
+
     }
 
     document.getElementById("tabelLaporan").innerHTML = isi;
+
 }
 
-// Hapus semua laporan
+// ===============================
+// HAPUS SEMUA LAPORAN
+// ===============================
+
 function hapusLaporan() {
 
     if (confirm("Yakin ingin menghapus semua laporan?")) {
@@ -49,11 +66,14 @@ function hapusLaporan() {
 
         tampilLaporan();
 
-        alert("Semua laporan berhasil dihapus.");
+        alert("Laporan berhasil dihapus.");
 
     }
 
 }
 
-// Tampilkan saat halaman dibuka
+// ===============================
+// LOAD HALAMAN
+// ===============================
+
 tampilLaporan();
