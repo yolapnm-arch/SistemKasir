@@ -1,32 +1,40 @@
-# Sistem Kasir
 
-## Deskripsi
-Aplikasi kasir sederhana berbasis HTML, CSS, dan JavaScript.
+Sistem Kasir Sederhana
 
-## Fitur
-- Login
-- CRUD Data Barang
-- Pencarian Barang
+Deskripsi
 
-## Cara Instalasi
-Clone repository:
-git clone <url-repository>
+Sistem Kasir Sederhana merupakan aplikasi berbasis HTML, CSS, dan JavaScript yang digunakan untuk mengelola data barang, melakukan transaksi penjualan, serta menampilkan laporan penjualan. Aplikasi ini dilengkapi fitur login sederhana, CRUD data barang, dan pencarian data.
 
-## Cara Menjalankan
-Buka file login.html di browser.
+Cara Instalasi
+git clone https://github.com/yolapnm-arch/SistemKasir.git
+cd SistemKasir
 
-## Struktur Folder
-- login.html
-- kasir.html
-- style.css
-- script.js
-- README.md
+Cara Menjalankan
+Buka file login.html menggunakan browser.
+Login ke aplikasi.
+Gunakan menu Dashboard untuk mengakses Data Barang, Transaksi, dan Laporan.
 
-## Riwayat Commit
-- Initial commit
-- Menambahkan fitur login
-- Menambahkan fitur CRUD
-- Menambahkan fitur pencarian
-- Merge ke develop
-- Simulasi merge conflict
-- Release v1.0
+Struktur Folder
+SistemKasir/
+│── login.html
+│── dashboard.html
+│── databarang.html
+│── databarang.js
+│── transaksi.html
+│── transaksi.js
+│── laporan.html
+│── laporan.js
+│── style.css
+└── README.md
+
+Riwayat Commit
+Contoh:
+Initial commit
+Menambahkan halaman Login
+Menambahkan Dashboard
+Menambahkan CRUD Data Barang
+Menambahkan fitur Pencarian
+Menambahkan halaman Transaksi
+Menambahkan halaman Laporan
+Memperbaiki bug
+Membuat Release v1.0
