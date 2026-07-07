@@ -1,143 +1,183 @@
-let dataBarang =
-JSON.parse(localStorage.getItem("barang")) || [];
+// Ambil data barang
+let barang = JSON.parse(localStorage.getItem("barang")) || [];
 
+// Ambil laporan
+let laporan = JSON.parse(localStorage.getItem("laporan")) || [];
+
+// Menyimpan transaksi sementara
 let transaksi = [];
 
-const selectBarang =
-document.getElementById("barang");
+// Isi dropdown barang
+function loadBarang() {
 
-dataBarang.forEach((item,index)=>{
+    let pilih = document.getElementById("barang");
 
-selectBarang.innerHTML += `
-<option value="${index}">
-${item.nama}
-</option>
-`;
+    pilih.innerHTML = '<option value="">-- Pilih Barang --</option>';
 
-});
-
-function ambilHarga(){
-
-let index = selectBarang.value;
-
-if(index==="") return;
-
-document.getElementById("harga").value =
-dataBarang[index].harga;
+    barang.forEach((b, i) => {
+        pilih.innerHTML += `
+            <option value="${i}">
+                ${b.nama}
+            </option>
+        `;
+    });
 
 }
 
+// Ambil harga otomatis
+function ambilHarga() {
+
+    let index = document.getElementById("barang").value;
+
+    if(index==""){
+        document.getElementById("harga").value="";
+        return;
+    }
+
+    document.getElementById("harga").value = barang[index].harga;
+
+}
+
+// Tambah transaksi
 function tambahTransaksi(){
 
-let index = selectBarang.value;
+    let index = document.getElementById("barang").value;
+    let jumlah = Number(document.getElementById("jumlah").value);
 
-let jumlah =
-parseInt(document.getElementById("jumlah").value);
+    if(index=="" || jumlah<=0){
+        alert("Pilih barang dan isi jumlah.");
+        return;
+    }
 
-if(index==="" || !jumlah){
-alert("Lengkapi data");
-return;
-}
+    if(jumlah > barang[index].stok){
+        alert("Stok tidak mencukupi!");
+        return;
+    }
 
-let barang = dataBarang[index];
+    let subtotal = barang[index].harga * jumlah;
 
-if(jumlah > barang.stok){
-alert("Stok tidak cukup");
-return;
-}
+    transaksi.push({
+        nama: barang[index].nama,
+        harga: barang[index].harga,
+        jumlah: jumlah,
+        subtotal: subtotal
+    });
 
-let total = barang.harga * jumlah;
+    barang[index].stok -= jumlah;
 
-transaksi.push({
-nama:barang.nama,
-harga:barang.harga,
-jumlah:jumlah,
-total:total
-});
+    localStorage.setItem("barang", JSON.stringify(barang));
 
-barang.stok -= jumlah;
+    tampilTransaksi();
 
-localStorage.setItem(
-"barang",
-JSON.stringify(dataBarang)
-);
-
-tampilData();
-
-document.getElementById("jumlah").value="";
+    document.getElementById("barang").value="";
+    document.getElementById("harga").value="";
+    document.getElementById("jumlah").value="";
 
 }
 
-function tampilData(){
+// Tampilkan transaksi
+function tampilTransaksi(){
 
-let tbody =
-document.getElementById("tbody");
+    let isi="";
+    let totalBarang=0;
+    let totalBayar=0;
 
-let html="";
+    transaksi.forEach((t,i)=>{
 
-let totalBarang=0;
-let totalBayar=0;
+        isi += `
+        <tr>
+            <td>${i+1}</td>
+            <td>${t.nama}</td>
+            <td>Rp ${t.harga.toLocaleString("id-ID")}</td>
+            <td>${t.jumlah}</td>
+            <td>Rp ${t.subtotal.toLocaleString("id-ID")}</td>
+            <td>
+                <button onclick="hapusTransaksi(${i})">Hapus</button>
+            </td>
+        </tr>
+        `;
 
-transaksi.forEach(item=>{
+        totalBarang += t.jumlah;
+        totalBayar += t.subtotal;
 
-html+=`
-<tr>
-<td>${item.nama}</td>
-<td>Rp ${item.harga}</td>
-<td>${item.jumlah}</td>
-<td>Rp ${item.total}</td>
-</tr>
-`;
+    });
 
-totalBarang += item.jumlah;
-totalBayar += item.total;
-
-});
-
-tbody.innerHTML = html;
-
-document.getElementById("totalBarang")
-.innerText = totalBarang;
-
-document.getElementById("totalBayar")
-.innerText = totalBayar;
+    document.getElementById("tabelTransaksi").innerHTML = isi;
+    document.getElementById("totalBarang").innerHTML = totalBarang;
+    document.getElementById("totalBayar").innerHTML = totalBayar.toLocaleString("id-ID");
 
 }
 
+// Hapus transaksi
+function hapusTransaksi(i){
+
+    let item = transaksi[i];
+
+    let indexBarang = barang.findIndex(b=>b.nama===item.nama);
+
+    if(indexBarang!=-1){
+        barang[indexBarang].stok += item.jumlah;
+        localStorage.setItem("barang", JSON.stringify(barang));
+    }
+
+    transaksi.splice(i,1);
+
+    tampilTransaksi();
+
+}
+
+// Simpan ke laporan
 function simpanTransaksi(){
 
-if(transaksi.length===0){
-alert("Belum ada transaksi");
-return;
-}
+    if(transaksi.length==0){
+        alert("Belum ada transaksi.");
+        return;
+    }
 
-let laporan =
-JSON.parse(localStorage.getItem("laporan"))
-|| [];
+    let totalBarang=0;
+    let totalBayar=0;
 
-laporan.push({
+    transaksi.forEach(t=>{
+        totalBarang += t.jumlah;
+        totalBayar += t.subtotal;
+    });
 
-tanggal:new Date().toLocaleString(),
+    laporan.push({
+        tanggal:new Date().toLocaleString("id-ID"),
+        detail:transaksi,
+        totalBarang:totalBarang,
+        totalBayar:totalBayar
+    });
 
-totalBarang:
-document.getElementById("totalBarang").innerText,
+    localStorage.setItem("laporan",JSON.stringify(laporan));
 
-totalBayar:
-document.getElementById("totalBayar").innerText,
+    alert("Transaksi berhasil disimpan.");
 
-detail:[...transaksi]
+    transaksi=[];
 
-});
-
-localStorage.setItem(
-"laporan",
-JSON.stringify(laporan)
-);
-
-alert("Transaksi berhasil disimpan");
-
-transaksi=[];
-
-tampilData();
+    tampilTransaksi();
 
 }
+
+// Batal transaksi
+function batalTransaksi(){
+
+    transaksi.forEach(item=>{
+
+        let indexBarang = barang.findIndex(b=>b.nama===item.nama);
+
+        if(indexBarang!=-1){
+            barang[indexBarang].stok += item.jumlah;
+        }
+
+    });
+
+    localStorage.setItem("barang",JSON.stringify(barang));
+
+    transaksi=[];
+
+    tampilTransaksi();
+
+}
+
+loadBarang();

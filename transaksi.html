@@ -2,17 +2,55 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Transaksi</title>
 
 <style>
+
 body{
-    font-family:Arial;
-    padding:20px;
+    font-family:Arial,sans-serif;
+    background:#f4f4f4;
+    margin:20px;
 }
 
-input,select,button{
-    padding:8px;
-    margin:5px;
+.container{
+    width:90%;
+    margin:auto;
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,.2);
+}
+
+h2{
+    text-align:center;
+}
+
+label{
+    font-weight:bold;
+}
+
+select,input{
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border:1px solid #ccc;
+    border-radius:5px;
+    box-sizing:border-box;
+}
+
+button{
+    padding:10px 15px;
+    margin:5px 2px;
+    border:none;
+    border-radius:5px;
+    background:#2196F3;
+    color:white;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1976D2;
 }
 
 table{
@@ -21,59 +59,97 @@ table{
     margin-top:20px;
 }
 
-table,th,td{
+table th,
+table td{
     border:1px solid #ddd;
-}
-
-th,td{
     padding:10px;
     text-align:center;
 }
 
-button{
-    cursor:pointer;
+table th{
+    background:#2196F3;
+    color:white;
 }
+
+.back{
+    background:#555;
+}
+
+.back:hover{
+    background:#333;
+}
+
+.total{
+    margin-top:20px;
+    font-size:18px;
+    font-weight:bold;
+}
+
 </style>
 
 </head>
 <body>
 
-<h2>Data Transaksi</h2>
+<div class="container">
+
+<a href="dashboard.html">
+<button class="back">Kembali ke Dashboard</button>
+</a>
+
+<h2>Transaksi Penjualan</h2>
+
+<label>Nama Barang</label>
 
 <select id="barang" onchange="ambilHarga()">
-<option value="">Pilih Barang</option>
+<option value="">-- Pilih Barang --</option>
 </select>
 
-<input type="number" id="harga" readonly placeholder="Harga">
+<label>Harga Barang</label>
 
-<input type="number" id="jumlah" placeholder="Jumlah">
+<input type="number" id="harga" readonly>
 
-<button onclick="tambahTransaksi()">Tambah</button>
+<label>Jumlah Barang</label>
+
+<input type="number" id="jumlah" min="1">
+
+<button onclick="tambahTransaksi()">Tambah Transaksi</button>
 
 <table>
+
 <thead>
+
 <tr>
+<th>No</th>
 <th>Nama Barang</th>
 <th>Harga</th>
 <th>Jumlah</th>
-<th>Total</th>
+<th>Subtotal</th>
+<th>Aksi</th>
 </tr>
+
 </thead>
 
-<tbody id="tbody"></tbody>
+<tbody id="tabelTransaksi">
+
+</tbody>
+
 </table>
 
-<h3>Total Barang : <span id="totalBarang">0</span></h3>
+<div class="total">
+<p>Total Barang : <span id="totalBarang">0</span></p>
 
-<h3>Total Bayar : Rp <span id="totalBayar">0</span></h3>
+<p>Total Bayar : Rp <span id="totalBayar">0</span></p>
+</div>
 
 <button onclick="simpanTransaksi()">
 Simpan Transaksi
 </button>
 
-<button onclick="window.location.href='dashboard.html'">
-Kembali Dashboard
+<button onclick="batalTransaksi()">
+Batal
 </button>
+
+</div>
 
 <script src="transaksi.js"></script>
 
