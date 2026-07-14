@@ -31,29 +31,47 @@ function simpanLocal() {
 }
 
 // =======================
-// TAMPIL DATA
+// TAMPIL DATA + PENCARIAN
 // =======================
 
 function tampil() {
 
     let isi = "";
 
+    let keyword = "";
+
+    if (document.getElementById("cari")) {
+        keyword = document.getElementById("cari").value.toLowerCase();
+    }
+
     barang.forEach((b, i) => {
 
-        isi += `
-        <tr>
-            <td>${i + 1}</td>
-            <td>${b.nama}</td>
-            <td>Rp ${Number(b.harga).toLocaleString("id-ID")}</td>
-            <td>${b.stok}</td>
-            <td>
-                <button onclick="edit(${i})">Edit</button>
-                <button onclick="hapus(${i})">Hapus</button>
-            </td>
-        </tr>
-        `;
+        if (b.nama.toLowerCase().includes(keyword)) {
+
+            isi += `
+            <tr>
+                <td>${i + 1}</td>
+                <td>${b.nama}</td>
+                <td>Rp ${Number(b.harga).toLocaleString("id-ID")}</td>
+                <td>${b.stok}</td>
+                <td>
+                    <button onclick="edit(${i})">Edit</button>
+                    <button onclick="hapus(${i})">Hapus</button>
+                </td>
+            </tr>
+            `;
+
+        }
 
     });
+
+    if (isi == "") {
+        isi = `
+        <tr>
+            <td colspan="5">Data tidak ditemukan</td>
+        </tr>
+        `;
+    }
 
     document.getElementById("tabel").innerHTML = isi;
 
@@ -81,21 +99,17 @@ function simpan() {
     if (index == "") {
 
         barang.push({
-
             nama: nama,
             harga: harga,
             stok: stok
-
         });
 
     } else {
 
         barang[index] = {
-
             nama: nama,
             harga: harga,
             stok: stok
-
         };
 
     }
