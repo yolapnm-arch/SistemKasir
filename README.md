@@ -16,7 +16,8 @@ Gunakan menu Dashboard untuk mengakses Data Barang, Transaksi, dan Laporan.
 
 Struktur Folder
 SistemKasir/
-│── login.html
+│── index.html
+│── login.js
 │── dashboard.html
 │── databarang.html
 │── databarang.js
